@@ -9,6 +9,13 @@ app.use(express.json())
 app.use(restauranteRoutes)
 app.use(dialogflowRoutes)
 
+app.get('/', (req, res) => {
+  res.json({
+    ok: true,
+    env: process.env.NODE_ENV,
+  })
+})
+
 app.listen(config.SERVER.PORT, () => {
   console.log('====================')
   console.log('SERVER STARTED')
