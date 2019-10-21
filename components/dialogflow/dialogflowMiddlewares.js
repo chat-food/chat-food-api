@@ -19,6 +19,7 @@ const formatPhones = (req, res, next) => {
 const formatDialogflow = (req, res, next) => {
   req.dialogflow = {
     intent: req.body.queryResult.intent.displayName,
+    params: req.body.queryResult.parameters,
   }
 
   next()
