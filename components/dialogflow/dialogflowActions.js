@@ -32,8 +32,7 @@ const createMessageCadastroIntent = cliente => {
   return `Cadastro realizado!
 Nome: ${cliente.nome}
 Telefone: ${cliente.telefone}
-CPF: ${cliente.cpf}
-`
+CPF: ${cliente.cpf}`
 }
 
 const webhook = async (req, res) => {
