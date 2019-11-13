@@ -16,11 +16,11 @@ class PedidoDAO {
         pedido (
             id_restaurante, 
             id_cliente, 
+            id_endereco,
             descricao,
             horario,
             status,
-            valor_total,
-            id_endereco
+            valor_total
         )
         VALUES (?, ?, ?, ?, ?, ?, ?)
     `
@@ -49,6 +49,37 @@ class PedidoDAO {
           })
         },
       )
+    })
+  }
+
+  getById(idPedido) {
+    const query = `
+      SELECT 
+        id_restaurante, 
+        id_cliente, 
+        id_endereco,
+        descricao,
+        horario,
+        status,
+        valor_total
+      FROM 
+        pedido
+      WHERE
+        id_pedido = ?
+    `
+
+    return new Promise((resovle, reject) => {
+      db.query(query, [idPedido], (error, results, fields) => {
+        if (error) {
+          reject(error)
+          return
+        }
+
+        resovle({
+          results: humps.camelizeKeys(results),
+          fields,
+        })
+      })
     })
   }
 }
