@@ -10,7 +10,7 @@ const createPedidoDescription = (itens, itensAdicionados) => {
       return `${quantidade} x ${item.nome}`
     })
     .filter(item => !!item)
-    .join('-')
+    .join('\n')
 }
 
 const createPedidoDate = () => {

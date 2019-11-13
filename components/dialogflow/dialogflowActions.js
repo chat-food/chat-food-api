@@ -137,6 +137,8 @@ Para realizar um pedido, consulte nosso cardápio e após isso digite "Pedido: c
     const itensAdicionados = (await itemDao.getByIds(
       itens.map(({ idItem }) => idItem),
     )).results
+    const endereco = (await enderecoDao.getByIdCliente(cliente.idCliente))
+      .results[0]
     const resultadoInsertPedido = (await pedidoDao.insert({
       idRestaurante: restaurante.idRestaurante,
       idCliente: cliente.idCliente,
@@ -144,7 +146,7 @@ Para realizar um pedido, consulte nosso cardápio e após isso digite "Pedido: c
       descricao: createPedidoDescription(itens, itensAdicionados),
       horario: createPedidoDate(),
       valorTotal: calculatePedidoTotal(itens, itensAdicionados),
-      idEndereco: 1,
+      idEndereco: endereco.idEndereco,
     })).results
 
     const pedido = (await pedidoDao.getById(resultadoInsertPedido.insertId))
