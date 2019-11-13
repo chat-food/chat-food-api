@@ -8,6 +8,18 @@ const removeWhatsappPrefix = phone => {
   return phone
 }
 
+const formatItensQuantidade = itens => {
+  return itens.map(item => {
+    const [idItem, quantidade] = item.split('x')
+
+    return {
+      idItem: +idItem,
+      quantidade: +quantidade,
+    }
+  })
+}
+
 module.exports = {
   removeWhatsappPrefix,
+  formatItensQuantidade,
 }

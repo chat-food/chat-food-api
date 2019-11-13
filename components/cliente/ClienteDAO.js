@@ -55,6 +55,34 @@ class ClienteDAO {
       })
     })
   }
+
+  getByTelefone(telefone) {
+    const query = `
+      SELECT
+        id_cliente,
+        nome, 
+        telefone, 
+        cpf
+      FROM
+        cliente
+      WHERE
+        telefone = ?
+  `
+
+    return new Promise((resovle, reject) => {
+      db.query(query, [telefone], (error, results, fields) => {
+        if (error) {
+          reject(error)
+          return
+        }
+
+        resovle({
+          results: humps.camelizeKeys(results),
+          fields,
+        })
+      })
+    })
+  }
 }
 
 module.exports = ClienteDAO
